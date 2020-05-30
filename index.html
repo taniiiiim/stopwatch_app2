@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Stopwatch and Timer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/vue@2.5.17"></script>
+</head>
+<body>
+  <main id="app">
+    <div class="box">
+      <div class="watch">
+        <screen
+          :time='time'
+          :is-running='isRunning'
+          :function-name='functionName'
+        ></screen>
+        <div class="btns">
+          <left-button
+            :is-running='isRunning'
+            :function-name='functionName'
+            :time-overed='timeOvered'
+            @process='process'
+          ></left-button>
+          <right-button
+            :is-running='isRunning'
+            :function-name='functionName'
+            @reset='reset'
+          ></right-button >
+        </div>
+        <bottom-button
+          :is-running='isRunning'
+          :time-overed='timeOvered'
+          @toggle='toggle'
+        ></bottom-button>
+      </div>
+      <div class="bar" v-if='functionName==="Timer"'>
+        <div class="hour">
+          <span>Hour</span>
+          <input type="range"
+            class="initial-time-change-bar"
+            max="24"
+            min="0"
+            :value="initialTimeHour"
+            @input="initialTimeHourChange"
+            :disabled="isRunning"
+          />
+        </div>
+        <div class="min">
+          <span>Min</span>
+          <input type="range"
+            class="initial-time-change-bar"
+            max="59"
+            min="0"
+            :value="initialTimeMin"
+            @input="initialTimeMinChange"
+            :disabled="isRunning"
+          />
+        </div>
+        <div class="sec">
+          <span>Sec</span>
+          <input type="range"
+            class="initial-time-change-bar"
+            max="59"
+            min="0"
+            :value="initialTimeSec"
+            @input="initialTimeSecChange"
+            :disabled="isRunning"
+          />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="App.js">
+  </script>
+</body>
+</html>
